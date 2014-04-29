@@ -10,8 +10,9 @@ function [a, Rt, T, pars, metVec] = tawfGridSearchParameters(x, y)
 tawfConstants;
 
 % Initialize ranges to check
-a_range  = 0:0.1:0.95;
-Rt_range = 0.1:0.2:2.5;
+%a_range  = 0:0.1:0.95;
+a_range = 0.75;
+Rt_range = 0.1:0.1:2.5;
 T_range  = 0.02:0.01:.1;
 
 % Setup meshgrid to loop over

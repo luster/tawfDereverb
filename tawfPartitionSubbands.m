@@ -1,5 +1,8 @@
 function Pout = tawfPartitionSubbands(Pin,subbands)
 
+% DC, 2, ..., , FS/2
+% 1,  2, ..., , FS/2
+
 [~,n] = size(Pin);
 
 subbandIdxs = freq2idx(subbands.subbands, ...

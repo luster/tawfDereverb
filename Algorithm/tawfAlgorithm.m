@@ -3,7 +3,7 @@ function [x_hat,G] = tawfAlgorithm(a, Rt, T, Y)
 tawfConstants;
 
 % Reverb model parameters
-N = round(T*fs/frameLen);
+N = ceil(T*fs/frameLen);
 if N==0
     N=1;
 end
@@ -38,9 +38,9 @@ for ii=1:length(subbandIdxs)-1
     G_ = [G_; repmat(G(ii,:),repmatNumbers(ii),1)];
 end
 
-for i = 1:size(G_,1)
-    G_(i,:) = smooth(G_(i,:),3)';
-end
+% for i = 1:size(G_,1)
+%     G_(i,:) = smooth(G_(i,:),3)';
+% end
 
 % Apply gain to STFT to scale out reverb power
 %W = [G_;flipud(G(2:end-1,:

@@ -11,7 +11,7 @@ tawfConstants;
 
 % Initialize ranges to check
 %a_range  = 0:0.1:0.95;
-a_range = 0.75;
+a_range = .75;
 Rt_range = 0.1:0.1:2.5;
 T_range  = 0.02:0.01:.1;
 
@@ -42,7 +42,7 @@ for ii = 1:len
 end
 close(h);
 
-plot(metVec);
+plot(mag2db(metVec));
 
 % Figure out the best value
 [~,idx] = max(metVec);

@@ -2,12 +2,13 @@
 % Christian Sherland
 %
 % Dereverberation Algorithm with Paramater Estimation
-
+close all
 dbstop if error
-addpath(genpath('..'));
+tic;
+addpath(genpath('.'));
 tawfConstants;
 
-[x,fs] = audioread('dryspeech.mp3');  x = x(:,1);
+[x,fs] = audioread('Audio_Files/dryspeech.mp3');  x = x(:,1);
 
 % For artificial signal
 h = tawfGenerateRIR(fs, mic, n, r, rm, src);
@@ -31,7 +32,7 @@ y = conv(h, x);
 % Get the parameters
 % rn = 44100*3:44100*5;
 [a, Rt, T, pars, metVec] = tawfGridSearchParameters(x,y);
-
+toc;
 % Real signal
 % x = audioread('gtr_in.wav'); x = x(:,1);
 % y = conv(h,x);
@@ -42,14 +43,14 @@ y = [y; zeros(frameLen-overlapLen-mod(length(y),frameLen-overlapLen),1)];
 x = [x; zeros(length(y)-length(x),1)];
 
 % Window and FFT
-% tic;
+tic;
 Y = tawfSTFT(y, frameLen, overlapLen, winFunc);
 %Pyy = tawfEstimatePSD(Y, a);
 %%
 
 % Get dat estimated signal doe
 [x_hat,G] = tawfAlgorithm(a, Rt, T, Y);
-
+toc;
 % for i = 1:frameLen
 %     G(i,:) = smooth(G(i,:))';
 % end
@@ -59,7 +60,7 @@ Y = tawfSTFT(y, frameLen, overlapLen, winFunc);
 % 
 % % Reconstruct Dereveberated Signal
 % x_hat = tawfInverseSTFT(W, winFunc); % IFFT & Overlap Add
-toc;
+
 % Check out what the algorithm actually did
 figure(5);
 subplot(2,2,1),plot(x), ylim([-1 1]),           title('Reverberant signal y(t)')
@@ -78,6 +79,6 @@ playblocking(p);
 % Spectrogram plots
 figure();
 FF = linspace(0.1,1000,100);
-subplot(3,1,1), spectrogram(x,winFunc,overlapLen,FF,fs,'yaxis');
-subplot(3,1,2), spectrogram(y,winFunc,overlapLen,FF,fs,'yaxis');
-subplot(3,1,3), spectrogram(x_hat,winFunc,overlapLen,FF,fs,'yaxis');
+subplot(3,1,1), spectrogram(x,winFunc,overlapLen,FF,fs,'yaxis'); xlabel('Time (sec)')
+subplot(3,1,2), spectrogram(y,winFunc,overlapLen,FF,fs,'yaxis'); xlabel('Time (sec)')
+subplot(3,1,3), spectrogram(x_hat,winFunc,overlapLen,FF,fs,'yaxis'); xlabel('Time (sec)')

@@ -9,6 +9,10 @@ function [a, Rt, T, pars, metVec] = tawfGridSearchParameters(x, y)
 % Make sure constants are available
 tawfConstants;
 
+
+metVec = 0;
+pars = 0;
+
 % Initialize ranges to check
 %a_range  = 0:0.1:0.95;
 A = 0.75;
@@ -138,9 +142,9 @@ end
 %close(h);
 
 % Figure out the best value
-[~,idx] = max(metVec);
-a  = pars(idx,1);
-T  = pars(idx,2);
-Rt = pars(idx,3);
+%[~,idx] = max(metVec);
+% a  = pars(idx,1);
+% T  = pars(idx,2);
+% Rt = pars(idx,3);
 
 end

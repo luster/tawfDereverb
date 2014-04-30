@@ -41,7 +41,7 @@ y = [y; zeros(frameLen-overlapLen-mod(length(y),frameLen-overlapLen),1)];
 x = [x; zeros(length(y)-length(x),1)];
 
 % Window and FFT
-% tic;
+tic;
 Y = tawfSTFT(y, frameLen, overlapLen, winFunc);
 %Pyy = tawfEstimatePSD(Y, a);
 %%

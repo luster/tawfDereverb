@@ -7,7 +7,6 @@ N = round(T*fs/frameLen);
 if N==0
     N=1;
 end
-delta = 3 * log(10) / Rt;
 
 % Dereveberation algorithm
 Pyy = tawfEstimatePSD(Y, a);
@@ -18,6 +17,9 @@ subbands.subbands = subbands_;
 subbands.fftLen = fftLen;
 subbands.fs = fs;
 Pyy_ = tawfPartitionSubbands(Pyy,subbands);
+
+% Different rts 
+delta = 3 * log(10) ./ Rt;
 
 Prr = tawfEstimateReverbPower(exp(-2*delta*T), Pyy_, N);
 

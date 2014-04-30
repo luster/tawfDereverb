@@ -3,6 +3,6 @@ function [reverbPower] = tawfEstimateReverbPower(reverbModel, signalPSD, N)
 %   Detailed explanation goes here
 
 reverbPower = zeros(size(signalPSD));
-reverbPower(:,N+1:end) = reverbModel * signalPSD(:,1:end-N);
+reverbPower(:,N+1:end) = repmat(reverbModel, 1,size(signalPSD,2)-N)  .* signalPSD(:,1:end-N);
 
 end

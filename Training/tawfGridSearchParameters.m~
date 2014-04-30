@@ -45,7 +45,9 @@ Y = tawfSTFT(y, frameLen, overlapLen, winFunc);
 bestMet = -1e10;
 
 for rt1 = 1:length(Rt_range)
+    rt1
     for rt2 = 1:length(Rt_range)
+        rt
         for T_id = 1:length(T_range)
             rt = [ones(1, 13)*Rt_range(rt1), ones(1,12)*Rt_range(rt2)]';
             met = tawfGetMetricForParams(A, T_range(T_id), rt, x, y, Y);

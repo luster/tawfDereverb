@@ -3,7 +3,6 @@
 %
 % Dereverberation Algorithm with Paramater Estimation
 
-dbstop if error
 addpath(genpath('..'));
 tawfConstants;
 
